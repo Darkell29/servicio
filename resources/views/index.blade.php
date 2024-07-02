@@ -35,7 +35,7 @@
         transform: rotate(-45deg);
         margin: 0px;
         background: deepskyblue;
-        animation: drip 4s forwards;
+        animation: drip 2s forwards; /* Reducir a 2s */
     }
 
     h1 {
@@ -48,7 +48,7 @@
         margin: auto;
         text-align: center;
         opacity: 0;
-        animation: appear 2s 2.5s forwards;
+        animation: appear 1s 1.5s forwards; /* Reducir a 1s y retraso a 1.5s */
     }
 
     @keyframes appear {
@@ -73,11 +73,11 @@
         width: 150%;
         height: 150%;
         border: 10px solid skyblue;
-        animation: dripple 2s ease-out 1s;
+        animation: dripple 1.5s ease-out 0.5s; /* Reducir a 1s y retraso a 0.5s */
     }
 
     div.drop-container:after {
-        animation: dripple 2s ease-out 1.7s;
+        animation: dripple 1.5s ease-out 0.85s; /* Reducir a 1s y retraso a 0.85s */
     }
 
     @keyframes drip {
@@ -118,8 +118,8 @@
   <script>
     // Redirigir a la página de login después de que la animación termine
     setTimeout(function() {
-      window.location.href = 'login.html';
-    }, 6000); // Ajusta el tiempo de espera si es necesario
+      window.location.href = '/login';
+    }, 3500); // Ajusta el tiempo de espera a 3 segundos
   </script>
 </body>
 </html>
