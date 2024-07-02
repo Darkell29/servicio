@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lavandería Gonzalo</title>
+    <title>Lavandería S.O.S</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Sedgwick+Ave&display=swap" rel="stylesheet">
     <style>
         body {
             display: grid;
@@ -11,20 +14,27 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            overflow: hidden;
+            background-color: #f0f1f1;
         }
+        button.add-button:hover {
+            background-color: #3a85c6;
+            color: #FFF;
+        }
+
         .logo-container {
             grid-column: 1;
             grid-row: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1A237E;
+            background-color: #fad6e4;
             color: #FFF;
             padding: 20px;
         }
         .logo-container img {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
         }
         .table-container {
             grid-column: 1;
@@ -33,15 +43,16 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #1A237E;
-            color: #BDBDBD;
+            background-color: #fad6e4;
+            color: #441e54;
             padding: 20px;
         }
         .table-container table {
             width: 100%;
+            background-color: #f0f1f1;
         }
         .table-container table, th, td {
-            border: 1px solid #BDBDBD;
+            border: 1px solid #1baab8;
             border-collapse: collapse;
             padding: 10px;
             text-align: center;
@@ -54,13 +65,26 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            background-color: #1A237E;
-            color: #BDBDBD;
+            background-color: #fad6e4;
+            color: #441e54;
             padding: 20px;
         }
+        /* Cambios en el CSS */
         .form-container h2 {
-            margin-bottom: 30px;
+            margin-bottom: 0px;
+            color: #ef9fc3;
+            font-size: 40px; /* Tamaño de la palabra "Lavandería" */
+            text-align: center;
         }
+
+        .form-container .sos {
+            color: #3a85c6;
+            font-size: 100px; /* Tamaño de "S.O.S" */
+            font-weight: bold;
+            font-family: "Sedgwick Ave", cursive;
+
+        }
+
         .form-container .full-input, .form-container button {
             width: 80%;
             padding: 10px;
@@ -78,12 +102,12 @@
         .form-container button {
             margin-top: 20px;
             color: #FFF;
-            background-color: #009688;
+            background-color: #622b7a;
         }
         .image-container {
             grid-column: 3;
             grid-row: 1 / span 2;
-            background-image: url('imagenes/fondo.jpg');
+            background-image: url('imagenes/mujer.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -91,42 +115,114 @@
             color: red;
             font-size: small;
         }
-        /* Estilos para la tabla */
-        .items-table {
+        .items-table-container {
             grid-column: 3;
             grid-row: 1 / span 2;
-            display: none; /* La tabla está oculta al principio */
-            background-color: #FFE0B2; /* Color de fondo de la tabla */
-            color: #212121; /* Color del texto de la tabla */
-            overflow-y: auto; /* Hace que la tabla sea desplazable */
-            height: 100%; /* Ajusta esto a la altura que prefieras */
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #f0f1f1;
+            padding: 20px;
+            height: 100%;
+        }
+        .items-table-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            width: 100%;
+            max-height: calc(100% - 200px);
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #f0f1f1;
+        }
+        .items-table th, .items-table td {
+            border: 1px solid #1baab8;
+            padding: 10px;
+            text-align: left;
         }
         .items-table th {
-            background-color: #F57C00; /* Color de fondo de los encabezados de la tabla */
-            color: #FFF; /* Color del texto de los encabezados de la tabla */
+            background-color: #622b7a;
+            color: #FFF;
         }
-        .items-table td {
-            background-color: #FF9800; /* Color de fondo de las celdas de la tabla */
-            color: #757575; /* Color del texto de las celdas de la tabla */
+        .items-table tr:nth-child(even) {
+            background-color: #fad6e4;
         }
-        /* Estilos para el botón de registros para que se parezca al botón de venta */
-        .record-button {
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 200px;
+            margin-bottom: 20px;
+        }
+        .nav-button, .record-button, .print-button {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #BDBDBD;
-            background-color: #1A237E;
-            color: #FFF;
+            margin-bottom: 10px;
+            border: 1px solid #a3b3c1;
+            background-color: #ef9fc3;
+            color: #441e54;
             text-align: center;
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s, color 0.3s;
         }
-        .record-button:hover {
-            background-color: #009688;
+        .nav-button:hover, .record-button:hover, .print-button:hover {
+            background-color: #3a85c6;
             color: #FFF;
         }
+        .options-container {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .options-container button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: none;
+            background-color: #3a85c6;
+            color: #FFF;
+            cursor: pointer;
+        }
+        .options-container button:hover {
+            background-color: #a3b3c1;
+        }
+        .total-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: -40px;
+        }
+        .total-container .total-label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .total-container .print-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+        }
+        .total-container .print-controls select,
+        .total-container .print-controls input[type="date"],
+        .total-container .print-controls input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <div class="logo-container">
@@ -134,204 +230,344 @@
     </div>
     <div class="table-container">
         <table>
-           
+            <!-- Aquí puedes agregar más filas si es necesario -->
         </table>
-        <button class="record-button" id="recordButton">Registros</button>
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="window.location.href='/registros'">Registros</button>
+            <form method="POST" action="{{ route('misservi') }}" style="width: 100%;">
+                @csrf
+                <button type="submit" class="nav-button" id="recordButton">Gestión de Servicios</button>
+            </form>
+        </div>
     </div>
-    <div class="form-container" id="formContainer">
-        <h2>SUPER CLEAN</h2>
-        <input type="text" id="name" class="full-input" placeholder="Nombre" oninput="validateName()">
-        <span id="nameError" class="error"></span>
+        <!-- Cambios en el HTML -->
+        <div class="form-container" id="formContainer">
+        <h2>Lavandería<br><span class="sos">S.O.S</span></h2>
+        <input type="text" id="name" class="full-input" placeholder="Nombre">
         <div style="display: flex; justify-content: space-between; width: 80%;">
-            <input type="text" id="phone" class="half-input" placeholder="Teléfono" oninput="validatePhone()">
-            <select id="serviceType" class="half-input" onchange="updateServiceType()">
-                <option value="ropa por kilo">Ropa por kilo</option>
-                <option value="edredon individual">Edredón individual</option>
-                <option value="edredon matrimonial">Edredón matrimonial</option>
-                <option value="edredon queen size">Edredón queen size</option>
-                <option value="edredon king size">Edredón king size</option>
-                <option value="colcha">Colcha</option>
-                <option value="sabana">Sábana</option>
-                <option value="planchado">Planchado</option>
+            <input type="text" id="phone" class="half-input" placeholder="Teléfono">
+            <select id="serviceType" class="half-input" onchange="updateKilogramsPlaceholder()">
+                <!-- Los servicios serán cargados dinámicamente -->
             </select>
         </div>
-        <div style="display: flex; justify-content: space-between; width: 80%;">
-            <input type="text" id="kilograms" class="half-input" placeholder="Kilogramos">
-            <select id="advance" class="half-input" onchange="toggleAdvanceAmount()">
-                <option value="anticipo">Anticipo</option>
-                <option value="pagado">Pagado</option>
-            </select>
-            <input type="text" id="advanceAmount" class="half-input" placeholder="Cantidad de anticipo" oninput="validateAdvanceAmount()">
+            <div style="display: flex; justify-content: space-between; width: 80%;">
+                <input type="number" id="kilograms" class="half-input" placeholder="Cantidad" oninput="calculateTotal()">
+                <input type="text" id="total" class="half-input" placeholder="Total" value="Total" readonly>
+            </div>
+            <button class="add-button" onclick="addItem()">Agregar</button>
         </div>
-        <div style="display: flex; justify-content: space-between; width: 80%;">
-            <input type="date" id="deliveryDate" class="half-input" min="2022-01-01">
-            <input type="text" id="total" class="half-input" placeholder="Total" value="Total" readonly>
-        </div>
-        <button onclick="addItem()">Agregar</button>
-        <button onclick="printTicket()">Imprimir ticket</button>
-    </div>
+
     <div class="image-container" id="imageContainer"></div>
-    <table class="items-table" id="itemsTable">
-        <tr>
-            <th>Servicio</th>
-            <th>Cantidad</th>
-            <th>Total</th>
-        </tr>
-    </table>
+    <div class="items-table-container" id="itemsTableContainer">
+        <div class="items-table-wrapper">
+            <table class="items-table" id="itemsTable">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="total-container">
+            <div class="total-label">Total: <span id="totalSum">0.00 MXN</span></div>
+            <div class="print-controls">
+                <input type="date" id="deliveryDate" placeholder="Fecha de entrega">
+                <select id="advanceOption" onchange="toggleAdvanceInput()">
+                    <option value="ninguno">Ninguno</option>
+                    <option value="anticipo">Anticipo</option>
+                    <option value="pagado">Pagado</option>
+                </select>
+                <input type="number" id="advanceAmount" placeholder="Monto del anticipo" style="display: none;" oninput="validateAdvanceAmount(this)">
+                <button class="print-button" onclick="printTicket()">Imprimir</button>
+            </div>
+        </div>
+    </div>
+    <div id="optionsContainer" class="options-container"></div>
     <script>
         var items = [];
-        var sales = JSON.parse(localStorage.getItem('sales')) || [];
-        var prices = {
-            'ropa por kilo': 55,
-            'edredon individual': 75,
-            'edredon matrimonial': 85,
-            'edredon queen size': 100,
-            'edredon king size': 110,
-            'colcha': 60,
-            'sabana': 30,
-            'planchado': 10
-        };
+        var services = [];
+        var currentIndex = null;
 
         document.addEventListener("DOMContentLoaded", function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var user = urlParams.get('user');
-            document.getElementById('recordButton').onclick = function() {
-                window.location.href = 'registros.html?user=' + user;
-            };
+            loadServices();
+            setDefaultDeliveryDate();
         });
 
-        function addItem() {
-            var serviceType = document.getElementById('serviceType').value;
-            var kilograms = document.getElementById('kilograms').value;
-            var total = prices[serviceType] * kilograms;
+        function loadServices() {
+            fetch('/servicios')
+                .then(response => response.json())
+                .then(data => {
+                    services = data;
+                    var serviceTypeSelect = document.getElementById('serviceType');
+                    serviceTypeSelect.innerHTML = '';
+                    services.forEach(service => {
+                        var option = document.createElement('option');
+                        option.value = service.tipo_servicio;
+                        option.text = service.tipo_servicio;
+                        option.setAttribute('data-price', service.precio_por_unidad);
+                        option.setAttribute('data-tipo', service.tipo);
+                        serviceTypeSelect.appendChild(option);
+                    });
+                    updateKilogramsPlaceholder();
+                });
+        }
 
-            if (serviceType === '' || kilograms === '') {
-                alert('No se permiten valores vacíos');
+        function updateKilogramsPlaceholder() {
+            var serviceType = document.getElementById('serviceType').value;
+            var tipo = document.querySelector(`#serviceType option[value="${serviceType}"]`).getAttribute('data-tipo');
+            document.getElementById('kilograms').placeholder = tipo ? tipo : 'Cantidad';
+        }
+
+        function addItem() {
+            var name = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+            var serviceType = document.getElementById('serviceType').value;
+            var kilograms = parseFloat(document.getElementById('kilograms').value);
+            var price = parseFloat(document.querySelector(`#serviceType option[value="${serviceType}"]`).getAttribute('data-price'));
+            var tipo = document.querySelector(`#serviceType option[value="${serviceType}"]`).getAttribute('data-tipo');
+            var total = price * kilograms;
+
+            if (!name || !phone || !serviceType || kilograms <= 0 || isNaN(kilograms)) {
+                alert('No se permiten valores vacíos o 0 kilogramos');
                 return;
             }
 
             items.push({
                 serviceType: serviceType,
                 kilograms: kilograms,
-                total: total
+                total: total,
+                tipo: tipo
             });
 
             updateItemsTable();
-            document.getElementById('imageContainer').style.display = 'none'; // Oculta la imagen de fondo
-            document.getElementById('itemsTable').style.display = 'block'; // Muestra la tabla
+            document.getElementById('serviceType').value = services[0].tipo_servicio;
+            document.getElementById('kilograms').value = '';
+            document.getElementById('total').value = 'Total';
         }
 
         function updateItemsTable() {
-            var table = document.getElementById('itemsTable');
-            table.innerHTML = '<tr><th>Servicio</th><th>Cantidad</th><th>Total</th></tr>'; // Reset the table
+            var itemsTableContainer = document.getElementById('itemsTableContainer');
+            var imageContainer = document.getElementById('imageContainer');
+
+            if (items.length > 0) {
+                itemsTableContainer.style.display = 'flex';
+                imageContainer.style.display = 'none';
+            } else {
+                itemsTableContainer.style.display = 'none';
+                imageContainer.style.display = 'block';
+            }
+
+            var tableBody = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
 
             var totalSum = 0;
             for (var i = 0; i < items.length; i++) {
-                var row = table.insertRow(-1);
+                var row = tableBody.insertRow(-1);
                 row.insertCell(0).innerHTML = items[i].serviceType;
-                row.insertCell(1).innerHTML = items[i].kilograms;
-                row.insertCell(2).innerHTML = items[i].total;
+                row.insertCell(1).innerHTML = items[i].kilograms + ' ' + items[i].tipo;
+                row.insertCell(2).innerHTML = items[i].total.toFixed(2) + ' MXN';
+                row.setAttribute('data-index', i);
+                row.onclick = function() {
+                    toggleOptions(this.getAttribute('data-index'));
+                };
                 totalSum += items[i].total;
             }
-            document.getElementById('total').value = totalSum;
+            document.getElementById('totalSum').innerText = totalSum.toFixed(2) + ' MXN';
+            document.getElementById('total').value = totalSum.toFixed(2) + ' MXN';
         }
 
-        function updateServiceType() {
+        function calculateTotal() {
             var serviceType = document.getElementById('serviceType').value;
-            if (serviceType === 'ropa por kilo' || serviceType === 'planchado') {
-                document.getElementById('kilograms').placeholder = 'Kilogramos';
+            var kilograms = document.getElementById('kilograms').value;
+            var price = document.querySelector(`#serviceType option[value="${serviceType}"]`).getAttribute('data-price');
+            var total = price * kilograms;
+            document.getElementById('total').value = isNaN(total) ? 'Total' : total.toFixed(2) + ' MXN';
+        }
+
+        function toggleOptions(index) {
+            var optionsContainer = document.getElementById('optionsContainer');
+            if (currentIndex === index) {
+                optionsContainer.style.display = 'none';
+                currentIndex = null;
             } else {
-                document.getElementById('kilograms').placeholder = 'Piezas';
+                optionsContainer.innerHTML = `
+                    <button onclick="editItem(${index})">Editar</button>
+                    <button onclick="deleteItem(${index})">Eliminar</button>
+                `;
+                optionsContainer.style.display = 'block';
+                optionsContainer.style.position = 'absolute';
+                var row = document.querySelector(`tr[data-index="${index}"]`);
+                var rect = row.getBoundingClientRect();
+                optionsContainer.style.top = rect.bottom + 'px';
+                optionsContainer.style.left = rect.left + 'px';
+                currentIndex = index;
             }
         }
 
-        function validateName() {
-            var name = document.getElementById('name').value;
-            if (!/^[a-zA-Z\s]*$/.test(name)) {
-                document.getElementById('nameError').textContent = 'Este campo no acepta valores numéricos';
+        function editItem(index) {
+            var item = items[index];
+            var newKilograms = prompt('Ingrese la nueva cantidad:', item.kilograms);
+            if (newKilograms !== null && !isNaN(newKilograms) && newKilograms > 0) {
+                items[index].kilograms = parseFloat(newKilograms);
+                items[index].total = items[index].kilograms * parseFloat(document.querySelector(`#serviceType option[value="${items[index].serviceType}"]`).getAttribute('data-price'));
+                updateItemsTable();
             } else {
-                document.getElementById('nameError').textContent = '';
+                alert('Cantidad inválida.');
             }
         }
 
-        function validatePhone() {
-            var phone = document.getElementById('phone').value;
-            if (!/^\d{10}$/.test(phone)) {
-                document.getElementById('phoneError').textContent = '*Se necesitan 10 dígitos';
-            } else {
-                document.getElementById('phoneError').textContent = '';
+        function deleteItem(index) {
+            items.splice(index, 1);
+            updateItemsTable();
+            document.getElementById('optionsContainer').style.display = 'none';
+            currentIndex = null;
+        }
+
+        function toggleAdvanceInput() {
+            var advanceOption = document.getElementById('advanceOption').value;
+            var advanceAmount = document.getElementById('advanceAmount');
+            advanceAmount.style.display = advanceOption === 'anticipo' ? 'block' : 'none';
+        }
+
+        function validateAdvanceAmount(input) {
+            var value = input.value;
+            if (isNaN(value) || value < 0) {
+                input.value = '';
             }
         }
 
-        function toggleAdvanceAmount() {
-            var advance = document.getElementById('advance').value;
-            var advanceAmountField = document.getElementById('advanceAmount');
-            if (advance === 'pagado') {
-                advanceAmountField.value = '';
-                advanceAmountField.disabled = true;
-            } else {
-                advanceAmountField.disabled = false;
-            }
+        function setDefaultDeliveryDate() {
+            var today = new Date();
+            var tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            document.getElementById('deliveryDate').value = tomorrow.toISOString().split('T')[0];
         }
+
 
         function printTicket() {
             var name = document.getElementById('name').value;
             var phone = document.getElementById('phone').value;
             var deliveryDate = document.getElementById('deliveryDate').value;
-            var advance = document.getElementById('advance').value;
-            var advanceAmount = document.getElementById('advanceAmount').value || '0';
-            var total = document.getElementById('total').value;
-            var saleDate = new Date().toISOString().split('T')[0];
+            var advanceOption = document.getElementById('advanceOption').value;
+            var advanceAmount = parseFloat(document.getElementById('advanceAmount').value) || 0;
 
-            if (name === '' || phone === '' || deliveryDate === '' || total === '') {
-                alert('No se permiten valores vacíos');
-            } else if (!/^[a-zA-Z\s]*$/.test(name)) {
-                alert('Nombre: este campo no acepta valores numéricos');
-            } else if (!/^\d{10}$/.test(phone)) {
-                alert('Teléfono: se necesitan 10 dígitos');
-            } else {
-                var ticket = 'Ticket: \n';
-                ticket += 'Nombre: ' + name + '\n';
-                ticket += 'Teléfono: ' + phone + '\n';
-                ticket += 'Fecha de entrega: ' + deliveryDate + '\n';
-
-                for (var i = 0; i < items.length; i++) {
-                    ticket += 'Producto: ' + items[i].serviceType + ', Cantidad: ' + items[i].kilograms + ', Total: ' + items[i].total + '\n';
-                }
-
-                ticket += 'Total: ' + total + '\n';
-                ticket += 'Cantidad de anticipo: ' + (advance === 'pagado' ? 'Pagado' : advanceAmount) + '\n';
-                ticket += '----------------------------------\n';
-                ticket += 'Restante: ' + (advance === 'pagado' ? '0' : (total - advanceAmount)) + '\n';
-
-                alert(ticket);
-
-                sales.push({
-                    name: name,
-                    phone: phone,
-                    serviceType: items.map(item => item.serviceType).join(', '),
-                    kilograms: items.map(item => item.kilograms).join(', '),
-                    advance: advance,
-                    advanceAmount: advanceAmount,
-                    deliveryDate: deliveryDate,
-                    saleDate: saleDate,
-                    total: total
-                });
-                localStorage.setItem('sales', JSON.stringify(sales));
-
-                // Limpiar los campos después de imprimir el ticket
-                document.getElementById('name').value = '';
-                document.getElementById('phone').value = '';
-                document.getElementById('serviceType').value = 'ropa por kilo';
-                document.getElementById('kilograms').value = '';
-                document.getElementById('advance').value = 'anticipo';
-                document.getElementById('advanceAmount').value = '';
-                document.getElementById('deliveryDate').value = '';
-                document.getElementById('total').value = 'Total';
-                items = [];
-                updateItemsTable();
+            if (!name || !phone || !deliveryDate) {
+                alert('Por favor, complete todos los campos requeridos.');
+                return;
             }
+
+            var totalSum = items.reduce((sum, item) => sum + item.total, 0);
+
+            if (advanceOption === 'anticipo' && advanceAmount > totalSum) {
+                alert('El anticipo no puede ser mayor al total a pagar.');
+                return;
+            }
+
+            var ventaData = {
+                name: name,
+                phone: phone,
+                deliveryDate: deliveryDate,
+                advanceOption: advanceOption,
+                advanceAmount: advanceAmount,
+                totalSum: totalSum,
+                items: items
+            };
+
+            fetch('/save-venta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify(ventaData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Venta guardada exitosamente') {
+                    alert('Venta guardada exitosamente');
+                    generateTicket(name, phone, deliveryDate, advanceOption, advanceAmount, totalSum);
+                } else {
+                    alert('Error al guardar la venta: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al guardar la venta');
+            });
         }
+
+        function generateTicket(name, phone, deliveryDate, advanceOption, advanceAmount, totalSum) {
+            var now = new Date(); // Obtiene la fecha y hora actual de la computadora del usuario
+            var dateTimeString = now.toLocaleString(); // Convierte la fecha y hora a un formato legible
+
+            var ticketContent = function(type) {
+                return `
+                    <div style="font-size: 14px; width: 57.5mm; text-align: center; margin: 0 auto;">
+                        <h2 style="text-align: center;">Lavandería S.O.S</h2>
+                        <h3 style="text-align: center;">${type}</h3>
+                        <p style="text-align: left;"><strong>Nombre:</strong> ${name}</p>
+                        <p style="text-align: left;"><strong>Teléfono:</strong> ${phone}</p>
+                        <p style="text-align: left;"><strong>Fecha de emisión:</strong> ${dateTimeString}</p>
+                        <p style="text-align: left;"><strong>Fecha de entrega:</strong> ${deliveryDate}</p>
+                        <hr>
+                        ${items.map(item => `
+                            <p style="text-align: left;">-----${item.serviceType}: ${(item.total / item.kilograms).toFixed(2)} MXN</p>
+                            <p style="text-align: left;">${item.kilograms} ${item.tipo} = ${item.total.toFixed(2)} MXN</p>
+                        `).join('')}
+                        <hr>
+                        ${advanceOption === 'ninguno' ? `
+                            <p style="text-align: left;"><strong>Total a pagar:</strong> ${totalSum.toFixed(2)} MXN</p>
+                        ` : `
+                            <p style="text-align: left;"><strong>Total:</strong> ${totalSum.toFixed(2)} MXN</p>
+                        `}
+                        ${advanceOption === 'anticipo' ? `
+                            <p style="text-align: left;"><strong>Anticipo:</strong> ${advanceAmount.toFixed(2)} MXN</p>
+                            <p style="text-align: left;"><strong>Restante por pagar:</strong> ${(totalSum - advanceAmount).toFixed(2)} MXN</p>
+                        ` : ''}
+                        ${advanceOption === 'pagado' ? `
+                            <p style="text-align: left;"><strong>PAGADO</strong></p>
+                        ` : ''}
+                        ${type === 'CLIENTE' || type === 'VENDEDOR' ? `
+                            <p style="font-size: 12px; text-align: left;">
+                                <strong style="display: block; text-align: center;">Consideraciones:</strong><br>
+                                A) El objeto del servicio es el lavado, planchado y tintorería de las prendas que arriba se describen, en caso de ser diferente se especificará.<br>
+                                B) No nos hacemos responsables por prendas o artículos después de 30 días. Después de ese periodo tendrá un costo diario de 10 % del total de la nota por concepto de almacenamiento.<br>
+                                C) No nos hacemos responsables por objetos olvidados dentro de las prendas.<br>
+                                D) La garantía se limita al cumplimiento del servicio solicitado y en base al monto de la presente nota de remisión.
+                            </p>
+                            <p style="font-size: 12px; text-align: center;">
+                                LAVANDERÍA S.O.S<br>MAR DE NORUEGA #9 COL. LAS HADAS, QUERÉTARO, QRO. TEL: 4421043568<br>
+                                HORARIO: LUNES A VIERNES DE 8:30 AM A 5:00 PM Y SÁBADO DE 9:00 AM A 2:00 PM.
+                            </p>
+                        ` : ''}
+                    </div>
+                `;
+            };
+
+            var printWindow = window.open('', '', 'width=800,height=600');
+            printWindow.document.write('<html><head><style>body { margin: 0; }</style></head><body>');
+            printWindow.document.write(ticketContent('CLIENTE'));
+            printWindow.document.write('<div style="page-break-before: always;"></div>');
+            printWindow.document.write(ticketContent('VENDEDOR'));
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+
+            // Clear items and reset form after printing
+            items = [];
+            updateItemsTable();
+            setDefaultDeliveryDate();
+
+            // Refresh the page after printing
+            window.location.reload();
+        }
+
+
     </script>
 </body>
 </html>
